@@ -61,18 +61,20 @@ void* queue_dequeue(Queue* queue) {
 }
 
 void queue_pretty_print(Queue* queue) {
-    printf("┌───────────────────────────────┐\n");
-    printf("│ Queue (Size: %3d)             │\n", queue->size);
-    printf("├───────────────────────────────┤\n");
+    printf("╭───────────────────────────────╮\n");
+    printf("│ Queue - Size: %-3d             │\n", queue->size);
+    printf("├─────────┬─────────────────────┤\n");
+    printf("│  Index  │  Value              │\n");
+    printf("├─────────┼─────────────────────┤\n");
     for (int i = 0; i < queue->size; i++) {
         int index = (queue->front + i) % queue->capacity;
-        printf("│ ");
+        printf("│  %-5d  │  ", index);
         queue->printFunc(queue->items[index]);
         printf(" ");
-        for (int j = 0; j < 25 - 2; j++) printf(" ");
+        for (int j = 0; j < 12; j++) printf(" ");
         printf("│\n");
     }
-    printf("└───────────────────────────────┘\n");
+    printf("╰─────────┴─────────────────────╯\n");
 }
 
 void queue_free(Queue* queue) {

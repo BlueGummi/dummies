@@ -13,7 +13,7 @@ void free_int(void* data) {
 }
 
 void print_int(void* data) {
-    printf("%6d", *(int*)data);
+    printf("%-6d", *(int*)data);
 }
 int compare_int(void* a, void* b) {
     return *(int*)a - *(int*)b;

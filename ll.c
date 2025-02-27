@@ -73,19 +73,22 @@ void* linked_list_remove_last(LinkedList* list) {
 }
 
 void linked_list_pretty_print(LinkedList* list) {
-    printf("┌───────────────────────────────┐\n");
+    printf("╭───────────────────────────────╮\n");
     printf("│ Linked List                   │\n");
-    printf("├───────────────────────────────┤\n");
+    printf("├─────────┬─────────────────────┤\n");
+    printf("│  Index  │  Value              │\n");
+    printf("├─────────┼─────────────────────┤\n"); 
     ListNode* temp = list->head;
+    int i = 0;
     while (temp != NULL) {
-        printf("│ ");
+        printf("│  %-5d  │  ", i);
         list->printFunc(temp->data);
-        printf(" ");
-        for (int j = 0; j < 25 - 2; j++) printf(" ");
+        for (int j = 0; j < 13; j++) printf(" ");
         printf("│\n");
         temp = temp->next;
+        i++;
     }
-    printf("└───────────────────────────────┘\n");
+    printf("╰─────────┴─────────────────────╯\n");
 }
 
 void linked_list_free(LinkedList* list) {
