@@ -42,7 +42,7 @@ HashMap* hashmap_create(int capacity, NewFunction newFunc, FreeFunction freeFunc
 }
 
 int hash(int key, int capacity) {
-    return key % capacity;
+    return (31 * key) % capacity;
 }
 
 void hashmap_put(HashMap* map, int key, void* value) {
