@@ -48,17 +48,23 @@ void allocator_free(Allocator *alloc, void *address) {
         }
         free(address);
     }
-    alloc->block_allocs -= 1;
+    if (alloc->block_allocs > 0) {
+        alloc->block_allocs -= 1;
+    }
     for (size_t i = 0; i < alloc->block_size; i++) {
         if (alloc->blocks[i] == address) {
-            alloc->blocks[i] == NULL;
+            alloc->blocks[i] = NULL;
             break;
         }
     }
-    void **new_blocks = malloc(alloc->block_size - 1);
+    if (alloc->block_size > 0) {
+        alloc->block_size -= 1;
+    }
+    void **new_blocks = malloc(alloc->block_size);
     for (size_t i = 0; i < alloc->block_size; i++) {
-        if (alloc->blocks[i] != NULL)
+        if (alloc->blocks[i] != NULL) {
             new_blocks[i] = alloc->blocks[i];
+        }
     }
     alloc->block_size -= 1;
     free(alloc->blocks);

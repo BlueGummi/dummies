@@ -1,5 +1,5 @@
 #include "core.h"
-#include <inttypes.h>
+#include <stddef.h>
 typedef struct {
     void *arena;
     size_t arena_size;
