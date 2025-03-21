@@ -1,4 +1,4 @@
-#include "q.h"
+#include <q.h>
 #include <stdio.h>
 #include <stdlib.h>
 

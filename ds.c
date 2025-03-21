@@ -1,9 +1,9 @@
-#include "al.h"
-#include "bt.h"
-#include "core.h"
-#include "hm.h"
-#include "ll.h"
-#include "q.h"
+#include <al.h>
+#include <bt.h>
+#include <core.h>
+#include <hm.h>
+#include <ll.h>
+#include <q.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

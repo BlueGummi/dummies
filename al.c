@@ -1,4 +1,4 @@
-#include "al.h"
+#include <al.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
