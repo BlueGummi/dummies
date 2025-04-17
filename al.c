@@ -99,16 +99,16 @@ void allocator_info(Allocator *alloc) {
         printf("│    allocator has been destroyed   │\n");
         goto footer;
     }
-    printf("│ %sarena%s %saddress%s ╺╪╸%-16p │\n", ANSI_BLUE, ANSI_RESET, 
+    printf("│ %sarena%s %saddress%s ╺╪╸%-16p │\n", ANSI_BLUE, ANSI_RESET,
            ANSI_MAGENTA, ANSI_RESET, alloc->arena);
 
-    printf("│ %sarena%s %spointer%s ╺╪╸%-16p │\n", ANSI_BLUE, ANSI_RESET, 
+    printf("│ %sarena%s %spointer%s ╺╪╸%-16p │\n", ANSI_BLUE, ANSI_RESET,
            ANSI_CYAN, ANSI_RESET, alloc->arena_ptr);
 
-    printf("│ %sarena%s %ssize%s    ╺╪╸%-16zu │\n", ANSI_BLUE, ANSI_RESET, 
+    printf("│ %sarena%s %ssize%s    ╺╪╸%-16zu │\n", ANSI_BLUE, ANSI_RESET,
            ANSI_BOLD, ANSI_RESET, alloc->arena_size);
 
-    printf("│ %sarena%s %stotal%s   ╺╪╸%-16zu │\n", ANSI_BLUE, ANSI_RESET, 
+    printf("│ %sarena%s %stotal%s   ╺╪╸%-16zu │\n", ANSI_BLUE, ANSI_RESET,
            ANSI_UNDERLINE, ANSI_RESET, alloc->arena_allocs);
 
     if (alloc->arena_ptr > alloc->arena) {
@@ -118,17 +118,16 @@ void allocator_info(Allocator *alloc) {
         for (void *i = alloc->arena; i < alloc->arena_ptr; i++) {
             printf("│ %s%-14p%s │ %s0x%-14hhx%s │\n", ANSI_CYAN, i,
                    ANSI_RESET, ANSI_GREEN, *(uint8_t *) i, ANSI_RESET);
-
         }
         printf("├────────────────┼──────────────────┤\n");
     }
-    printf("│ %sblock%s %saddress%s ╺╪╸%-16p │\n", ANSI_YELLOW, ANSI_RESET, 
+    printf("│ %sblock%s %saddress%s ╺╪╸%-16p │\n", ANSI_YELLOW, ANSI_RESET,
            ANSI_MAGENTA, ANSI_RESET, alloc->blocks);
 
-    printf("│ %sblock%s %ssize%s    ╺╪╸%-16zu │\n", ANSI_YELLOW, ANSI_RESET, 
+    printf("│ %sblock%s %ssize%s    ╺╪╸%-16zu │\n", ANSI_YELLOW, ANSI_RESET,
            ANSI_BOLD, ANSI_RESET, alloc->block_size);
 
-    printf("│ %sblock%s %stotal%s   ╺╪╸%-16zu │\n", ANSI_YELLOW, ANSI_RESET, 
+    printf("│ %sblock%s %stotal%s   ╺╪╸%-16zu │\n", ANSI_YELLOW, ANSI_RESET,
            ANSI_UNDERLINE, ANSI_RESET, alloc->block_allocs);
 
     if (alloc->blocks != NULL) {

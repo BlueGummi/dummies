@@ -72,4 +72,3 @@ char *color_to_ansi(Color color) {
         return ANSI_CYAN;
     }
 }
-
