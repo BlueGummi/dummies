@@ -1,3 +1,5 @@
+#ifndef ALLOCATOR_H
+#define ALLOCATOR_H
 #include "core.h"
 #include <stddef.h>
 #include <stdbool.h>
@@ -18,3 +20,4 @@ void *allocator_alloc(Allocator *alloc, size_t size);
 void allocator_free(Allocator *alloc, void *address);
 void allocator_destroy(Allocator **alloc_addr);
 void allocator_info(Allocator *alloc);
+#endif

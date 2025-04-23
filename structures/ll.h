@@ -1,3 +1,5 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 #include "core.h"
 typedef struct ListNode {
     void *data;
@@ -20,3 +22,4 @@ void linked_list_append(LinkedList *list, void *data);
 void *linked_list_remove_last(LinkedList *list);
 void linked_list_pretty_print(LinkedList *list);
 void linked_list_free(LinkedList *list);
+#endif

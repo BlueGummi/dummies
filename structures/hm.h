@@ -1,3 +1,5 @@
+#ifndef HASHMAP_H
+#define HASHMAP_H
 #include "core.h"
 typedef struct HashNode {
     int key;
@@ -24,3 +26,4 @@ void *hashmap_get(HashMap *map, int key);
 void hashmap_remove(HashMap *map, int key);
 void hashmap_pretty_print(HashMap *map);
 void hashmap_free(HashMap *map);
+#endif

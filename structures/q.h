@@ -1,3 +1,5 @@
+#ifndef QUEUE_H
+#define QUEUE_H
 #include "core.h"
 typedef struct Queue {
     void **items;
@@ -20,3 +22,4 @@ void *queue_dequeue(Queue *queue);
 void queue_pretty_print(Queue *queue);
 void queue_free(Queue *queue);
 Queue *queue_create(int capacity, NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc);
+#endif

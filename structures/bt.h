@@ -1,3 +1,5 @@
+#ifndef BINARYTREE_H
+#define BINARYTREE_H
 #include "core.h"
 typedef struct TreeNode {
     void *data;
@@ -28,3 +30,4 @@ void binary_tree_free(TreeNode *root, FreeFunction freeFunc);
 void binary_tree_insert(BinaryTree *tree, void *data);
 void binary_tree_remove(BinaryTree *tree, void *data, int (*compare)(void *, void *));
 void binary_tree_free_wrapper(BinaryTree *tree);
+#endif

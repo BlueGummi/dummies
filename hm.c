@@ -66,7 +66,7 @@ void hashmap_remove(HashMap *map, int key) {
 
 void hashmap_pretty_print(HashMap *map) {
     printf("╭───────────────────────────────╮\n");
-    printf("│           Hashmap             │\n");
+    printf("│            Hashmap            │\n");
     printf("├─────────┬─────────────────────┤\n");
     printf("│  Keys   │  Values             │\n");
     printf("├─────────┼─────────────────────┤\n");
