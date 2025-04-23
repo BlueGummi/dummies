@@ -1,13 +1,15 @@
+#include "core.h"
 #include <bt.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-BinaryTree *binary_tree_create(NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc) {
+BinaryTree *binary_tree_create(NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e) {
     BinaryTree *tree = (BinaryTree *) malloc(sizeof(BinaryTree));
     tree->root = NULL;
-    tree->newFunc = newFunc;
-    tree->freeFunc = freeFunc;
-    tree->printFunc = printFunc;
+    tree->new_data = n;
+    tree->free_data = f;
+    tree->print_data = p;
+    tree->err = e;
     tree->print = (PrettyPrint) binary_tree_print;
 
     tree->insert = binary_tree_insert;
@@ -54,7 +56,7 @@ void binary_tree_print(BinaryTree *tree) {
     printf("┌───────────────────────────────┐\n");
     printf("│ Binary Tree (Inorder)         │\n");
     printf("├───────────────────────────────┤\n");
-    tree_inorder(tree->root, tree->printFunc);
+    tree_inorder(tree->root, tree->print_data);
     printf("\n");
     printf("└───────────────────────────────┘\n");
 }
@@ -104,7 +106,7 @@ void binary_tree_free(TreeNode *root, FreeFunction freeFunc) {
 }
 
 void binary_tree_insert(BinaryTree *tree, void *data) {
-    TreeNode *newNode = tree_node_create(data, tree->newFunc);
+    TreeNode *newNode = tree_node_create(data, tree->new_data);
     if (tree->root == NULL) {
         tree->root = newNode;
     } else {
@@ -130,10 +132,10 @@ void binary_tree_insert(BinaryTree *tree, void *data) {
 }
 
 void binary_tree_remove(BinaryTree *tree, void *data, int (*compare)(void *, void *)) {
-    tree->root = tree_remove(tree->root, data, tree->freeFunc, compare);
+    tree->root = tree_remove(tree->root, data, tree->free_data, compare);
 }
 
 void binary_tree_free_wrapper(BinaryTree *tree) {
-    binary_tree_free(tree->root, tree->freeFunc);
+    binary_tree_free(tree->root, tree->free_data);
     free(tree);
 }

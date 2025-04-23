@@ -1,10 +1,4 @@
-#include <al.h>
-#include <bt.h>
-#include <colors.h>
-#include <core.h>
-#include <hm.h>
-#include <ll.h>
-#include <q.h>
+#include <ds.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +25,10 @@ int compare_int(void *a, void *b) {
     return *(int *) a - *(int *) b;
 }
 
+void handle_error(char *c) {
+    printf("%s", c);
+}
+
 int main() {
     Allocator *alloc = allocator_init();
     is_term = is_terminal();
@@ -41,7 +39,7 @@ int main() {
         hashmap_create(10, new_int, free_int, print_int);
     LinkedList *list = linked_list_create(new_int, free_int, print_int);
     Queue *queue = queue_create(10, new_int, free_int, print_int);
-    BinaryTree *tree = binary_tree_create(new_int, free_int, print_int);
+    BinaryTree *tree = binary_tree_create(new_int, free_int, print_int, handle_error);
 
     int num_operations = 2;
     for (int i = 0; i < num_operations; i++) {

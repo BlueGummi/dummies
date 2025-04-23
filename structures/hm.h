@@ -14,6 +14,7 @@ typedef struct HashMap {
     FreeFunction freeFunc;
     PrintFunction printFunc;
     PrettyPrint print;
+    ErrorFunction *err;
 
     void (*put)(struct HashMap *, int, void *);
     void *(*get)(struct HashMap *, int);

@@ -12,6 +12,7 @@ Queue *queue_create(int capacity, NewFunction newFunc, FreeFunction freeFunc, Pr
     queue->newFunc = newFunc;
     queue->freeFunc = freeFunc;
     queue->printFunc = printFunc;
+
     queue->print = (PrettyPrint) queue_pretty_print;
 
     queue->enqueue = queue_enqueue;

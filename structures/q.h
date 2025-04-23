@@ -11,6 +11,7 @@ typedef struct Queue {
     FreeFunction freeFunc;
     PrintFunction printFunc;
     PrettyPrint print;
+    ErrorFunction *err;
 
     void (*enqueue)(struct Queue *, void *);
     void *(*dequeue)(struct Queue *);

@@ -11,7 +11,7 @@ typedef struct {
     void **blocks;
     size_t block_size;
     size_t block_allocs;
-
+    ErrorFunction *err;
 } Allocator;
 extern bool is_term;
 Allocator *allocator_init(void);

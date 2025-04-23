@@ -4,4 +4,5 @@ typedef void *(*NewFunction)(void *);
 typedef void (*FreeFunction)(void *);
 typedef void (*PrintFunction)(void *);
 typedef void (*PrettyPrint)(void *);
+typedef void (ErrorFunction)(char *);
 #endif
