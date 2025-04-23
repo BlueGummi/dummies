@@ -3,12 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-LinkedList *linked_list_create(NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc) {
+LinkedList *linked_list_create(NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e) {
     LinkedList *list = (LinkedList *) malloc(sizeof(LinkedList));
     list->head = NULL;
-    list->newFunc = newFunc;
-    list->freeFunc = freeFunc;
-    list->printFunc = printFunc;
+    list->new_data = n;
+    list->free_data = f;
+    list->print_data = p;
+    list->err = e;
     list->print = (PrettyPrint) linked_list_pretty_print;
 
     list->append = linked_list_append;
@@ -20,7 +21,7 @@ LinkedList *linked_list_create(NewFunction newFunc, FreeFunction freeFunc, Print
 
 void linked_list_append(LinkedList *list, void *data) {
     ListNode *newNode = (ListNode *) malloc(sizeof(ListNode));
-    newNode->data = list->newFunc(data);
+    newNode->data = list->new_data(data);
     newNode->next = NULL;
 
     if (list->head == NULL) {
@@ -65,7 +66,7 @@ void linked_list_pretty_print(LinkedList *list) {
     int i = 0;
     while (temp != NULL) {
         printf("│  %-5d  │  ", i);
-        list->printFunc(temp->data);
+        list->print_data(temp->data);
         for (int j = 0; j < 13; j++)
             printf(" ");
         printf("│\n");
@@ -79,7 +80,7 @@ void linked_list_free(LinkedList *list) {
     ListNode *temp = list->head;
     while (temp != NULL) {
         ListNode *next = temp->next;
-        list->freeFunc(temp->data);
+        list->free_data(temp->data);
         free(temp);
         temp = next;
     }

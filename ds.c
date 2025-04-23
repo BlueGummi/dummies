@@ -37,7 +37,7 @@ int main() {
 
     HashMap *map =
         hashmap_create(10, new_int, free_int, print_int);
-    LinkedList *list = linked_list_create(new_int, free_int, print_int);
+    LinkedList *list = linked_list_create(new_int, free_int, print_int, handle_error);
     Queue *queue = queue_create(10, new_int, free_int, print_int);
     BinaryTree *tree = binary_tree_create(new_int, free_int, print_int, handle_error);
 
