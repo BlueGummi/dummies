@@ -29,8 +29,6 @@ void queue_enqueue(Queue *queue, void *item) {
         queue->rear = (queue->rear + 1) % queue->capacity;
         queue->items[queue->rear] = queue->newFunc(item);
         queue->size++;
-    } else {
-        printf("Queue Overflow!\n");
     }
 }
 
@@ -41,7 +39,6 @@ void *queue_dequeue(Queue *queue) {
         queue->size--;
         return item;
     } else {
-        printf("Queue Underflow!\n");
         return NULL;
     }
 }

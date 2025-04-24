@@ -13,7 +13,7 @@ typedef struct BinaryTree {
     FreeFunction free_data;
     PrintFunction print_data;
     PrettyPrint print;
-    ErrorFunction *err;
+    ErrorFunction err;
 
     void (*insert)(struct BinaryTree *, void *);
     void (*remove)(struct BinaryTree *, void *, int (*compare)(void *, void *));

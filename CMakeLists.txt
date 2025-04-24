@@ -4,7 +4,7 @@ project(ds C)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -O2")
 
-include_directories(structures)
+include_directories(include)
 file(GLOB SOURCE_FILES "*.c")
 
 add_executable(ds ${SOURCE_FILES})

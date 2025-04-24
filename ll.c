@@ -37,7 +37,6 @@ void linked_list_append(LinkedList *list, void *data) {
 
 void *linked_list_remove_last(LinkedList *list) {
     if (list->head == NULL) {
-        printf("Linked List is empty!\n");
         return NULL;
     } else if (list->head->next == NULL) {
         void *data = list->head->data;
