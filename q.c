@@ -1,17 +1,19 @@
+#include "core.h"
 #include <q.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-Queue *queue_create(int capacity, NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc) {
+Queue *queue_create(int capacity, NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e) {
     Queue *queue = (Queue *) malloc(sizeof(Queue));
     queue->items = (void **) malloc(capacity * sizeof(void *));
     queue->front = 0;
     queue->rear = -1;
     queue->size = 0;
     queue->capacity = capacity;
-    queue->newFunc = newFunc;
-    queue->freeFunc = freeFunc;
-    queue->printFunc = printFunc;
+    queue->newFunc = n;
+    queue->freeFunc = f;
+    queue->printFunc = p;
+    queue->err = e;
 
     queue->print = (PrettyPrint) queue_pretty_print;
 

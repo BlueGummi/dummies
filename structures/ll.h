@@ -12,7 +12,7 @@ typedef struct LinkedList {
     FreeFunction free_data;
     PrintFunction print_data;
     PrettyPrint print;
-    ErrorFunction *err;
+    ErrorFunction err;
 
     void (*append)(struct LinkedList *, void *);
     void *(*removeLast)(struct LinkedList *);

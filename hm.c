@@ -1,14 +1,16 @@
+#include "core.h"
 #include <hm.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-HashMap *hashmap_create(int capacity, NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc) {
+HashMap *hashmap_create(int capacity, NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e) {
     HashMap *map = (HashMap *) malloc(sizeof(HashMap));
     map->buckets = (HashNode **) calloc(capacity, sizeof(HashNode *));
     map->capacity = capacity;
-    map->newFunc = newFunc;
-    map->freeFunc = freeFunc;
-    map->printFunc = printFunc;
+    map->newFunc = n;
+    map->freeFunc = f;
+    map->printFunc = p;
+    map->err = e;
     map->print = (PrettyPrint) hashmap_pretty_print;
 
     map->put = hashmap_put;

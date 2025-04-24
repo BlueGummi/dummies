@@ -14,14 +14,14 @@ typedef struct HashMap {
     FreeFunction freeFunc;
     PrintFunction printFunc;
     PrettyPrint print;
-    ErrorFunction *err;
+    ErrorFunction err;
 
     void (*put)(struct HashMap *, int, void *);
     void *(*get)(struct HashMap *, int);
     void (*remove)(struct HashMap *, int);
     void (*free)(struct HashMap *);
 } HashMap;
-HashMap *hashmap_create(int capacity, NewFunction newFunc, FreeFunction freeFunc, PrintFunction printFunc);
+HashMap *hashmap_create(int capacity, NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e);
 void hashmap_put(HashMap *map, int key, void *value);
 void *hashmap_get(HashMap *map, int key);
 void hashmap_remove(HashMap *map, int key);

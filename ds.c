@@ -26,7 +26,7 @@ int compare_int(void *a, void *b) {
 }
 
 void handle_error(char *c) {
-    printf("%s", c);
+    printf("%s\n", c);
 }
 
 int main() {
@@ -36,9 +36,9 @@ int main() {
     srand(time(NULL));
 
     HashMap *map =
-        hashmap_create(10, new_int, free_int, print_int);
+        hashmap_create(10, new_int, free_int, print_int, handle_error);
     LinkedList *list = linked_list_create(new_int, free_int, print_int, handle_error);
-    Queue *queue = queue_create(10, new_int, free_int, print_int);
+    Queue *queue = queue_create(10, new_int, free_int, print_int, handle_error);
     BinaryTree *tree = binary_tree_create(new_int, free_int, print_int, handle_error);
 
     int num_operations = 2;
