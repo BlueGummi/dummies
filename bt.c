@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Given a node data allocator function `n`, a node data free function `f`,
+ * a node data print function `p`, and an error handling function `e`, 
+ * create and return a pointer to an empty binary tree with a NULL root.
+*/
 BinaryTree *binary_tree_create(NewFunction n, FreeFunction f, PrintFunction p, ErrorFunction e) {
     BinaryTree *tree = (BinaryTree *) malloc(sizeof(BinaryTree));
     tree->root = NULL;
@@ -19,6 +24,11 @@ BinaryTree *binary_tree_create(NewFunction n, FreeFunction f, PrintFunction p, E
     return tree;
 }
 
+/*
+ * Given a pointer `data` to data 
+ * and a given node data allocation function `newFunc`,
+ * create and return a pointer to a TreeNode with the data.
+*/
 TreeNode *tree_node_create(void *data, NewFunction newFunc) {
     TreeNode *newNode = (TreeNode *) malloc(sizeof(TreeNode));
     newNode->data = newFunc(data);
@@ -26,6 +36,10 @@ TreeNode *tree_node_create(void *data, NewFunction newFunc) {
     return newNode;
 }
 
+/*
+ * Given a root `root` to a tree and a print function `printFunc`,
+ * print the values inside the tree using a print function
+ */
 void tree_inorder(TreeNode *root, PrintFunction printFunc) {
     if (root == NULL)
         return;
@@ -35,23 +49,10 @@ void tree_inorder(TreeNode *root, PrintFunction printFunc) {
     tree_inorder(root->right, printFunc);
 }
 
-void binary_tree_pretty_print(TreeNode *root, int space, PrintFunction printFunc) {
-    if (root == NULL)
-        return;
-
-    space += 5;
-
-    binary_tree_pretty_print(root->right, space, printFunc);
-
-    printf("\n");
-    for (int i = 5; i < space; i++)
-        printf(" ");
-    printFunc(root->data);
-    printf("\n");
-
-    binary_tree_pretty_print(root->left, space, printFunc);
-}
-
+/*
+ * Given a binary tree `tree`, print the values in order
+ * with no indentation
+ */
 void binary_tree_print(BinaryTree *tree) {
     printf("┌───────────────────────────────┐\n");
     printf("│ Binary Tree (Inorder)         │\n");
@@ -61,6 +62,10 @@ void binary_tree_print(BinaryTree *tree) {
     printf("└───────────────────────────────┘\n");
 }
 
+/*
+ * Given a tree node `node`, find the leaf with the smallest value
+ * by repeatedly going to the left node
+*/
 TreeNode *tree_find_min(TreeNode *node) {
     while (node->left != NULL) {
         node = node->left;
@@ -68,6 +73,11 @@ TreeNode *tree_find_min(TreeNode *node) {
     return node;
 }
 
+/*
+ * Given a root `root`, a pointer `data` to data that will be removed, a function `freeFunc` to 
+ * free the data in a node, and a function `compare` to compare two tree nodes, find the node
+ * with the given value `data` and remove it.
+*/
 TreeNode *tree_remove(TreeNode *root, void *data, FreeFunction freeFunc, int (*compare)(void *, void *)) {
     if (root == NULL)
         return root;
@@ -96,6 +106,10 @@ TreeNode *tree_remove(TreeNode *root, void *data, FreeFunction freeFunc, int (*c
     return root;
 }
 
+/*
+ * Given a root `root`, and a node deallocation function `freeFunc`,
+ * traverse the binary tree and recursively deallocate all nodes
+ */
 void binary_tree_free(TreeNode *root, FreeFunction freeFunc) {
     if (root == NULL)
         return;
@@ -105,14 +119,18 @@ void binary_tree_free(TreeNode *root, FreeFunction freeFunc) {
     free(root);
 }
 
-void binary_tree_insert(BinaryTree *tree, void *data) {
+/*
+ * Given a binary tree `tree`, a pointer `data` and a comparison function `compare`,
+ * insert the value into the tree
+ */
+void binary_tree_insert(BinaryTree *tree, void *data, int (*compare)(void *, void *)) {
     TreeNode *newNode = tree_node_create(data, tree->new_data);
     if (tree->root == NULL) {
         tree->root = newNode;
     } else {
         TreeNode *current = tree->root;
         while (1) {
-            if (*(int *) data < *(int *) current->data) {
+            if (compare(data, current->data) < 0) {
                 if (current->left == NULL) {
                     current->left = newNode;
                     break;
@@ -131,10 +149,16 @@ void binary_tree_insert(BinaryTree *tree, void *data) {
     }
 }
 
+/*
+ * Wrapper for the tree removal function
+ */
 void binary_tree_remove(BinaryTree *tree, void *data, int (*compare)(void *, void *)) {
     tree->root = tree_remove(tree->root, data, tree->free_data, compare);
 }
 
+/*
+ * Wrapper for the tree free function
+ */
 void binary_tree_free_wrapper(BinaryTree *tree) {
     binary_tree_free(tree->root, tree->free_data);
     free(tree);

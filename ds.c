@@ -20,7 +20,6 @@ void free_int(void *data) {
 void print_int(void *data) {
     printf("%-6d", *(int *) data);
 }
-
 int compare_int(void *a, void *b) {
     return *(int *) a - *(int *) b;
 }
@@ -83,7 +82,7 @@ int main() {
         }
         queue->print(queue);
         if (operation == 0) {
-            tree->insert(tree, &value);
+            tree->insert(tree, &value, compare_int);
             printf("Inserted %d into Binary Tree\n", value);
         } else {
             tree->remove(tree, &value, compare_int);

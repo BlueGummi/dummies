@@ -15,7 +15,7 @@ typedef struct BinaryTree {
     PrettyPrint print;
     ErrorFunction err;
 
-    void (*insert)(struct BinaryTree *, void *);
+    void (*insert)(struct BinaryTree *, void *, int (*compare)(void *, void *));
     void (*remove)(struct BinaryTree *, void *, int (*compare)(void *, void *));
     void (*free)(struct BinaryTree *);
 } BinaryTree;
@@ -28,7 +28,7 @@ TreeNode *tree_find_min(TreeNode *node);
 TreeNode *tree_remove(TreeNode *root, void *data, FreeFunction freeFunc, int (*compare)(void *, void *));
 void binary_tree_free(TreeNode *root, FreeFunction freeFunc);
 
-void binary_tree_insert(BinaryTree *tree, void *data);
+void binary_tree_insert(BinaryTree *tree, void *data, int (*compare)(void *, void *));
 void binary_tree_remove(BinaryTree *tree, void *data, int (*compare)(void *, void *));
 void binary_tree_free_wrapper(BinaryTree *tree);
 #endif
