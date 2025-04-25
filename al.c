@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Create an allocator
+ */
 Allocator *allocator_init(void) {
     Allocator *alloc = malloc(sizeof(Allocator));
     alloc->arena_size = 4096;
@@ -15,6 +18,9 @@ Allocator *allocator_init(void) {
     return alloc;
 }
 
+/*
+ * Allocate a region inside the allocator's arena
+ */
 void *allocator_arenalloc(Allocator *alloc, size_t size) {
     if (size > alloc->arena_size) {
         alloc->arena_size += size;
@@ -26,6 +32,9 @@ void *allocator_arenalloc(Allocator *alloc, size_t size) {
     return returned;
 }
 
+/*
+ * Allocate a node in the allocator
+ */
 void *allocator_alloc(Allocator *alloc, size_t size) {
     alloc->block_allocs += 1;
     if (alloc->blocks == NULL) {
@@ -41,6 +50,9 @@ void *allocator_alloc(Allocator *alloc, size_t size) {
     return returned;
 }
 
+/*
+ * Free an allocated node in the allocator
+ */
 void allocator_free(Allocator *alloc, void *address) {
     if (address != NULL) {
         if (address >= alloc->arena && address <=
@@ -69,6 +81,10 @@ void allocator_free(Allocator *alloc, void *address) {
     alloc->blocks = new_blocks;
 }
 
+/*
+ * Given an address to a pointer to an allocator, deallocate
+ * all blocks and set the pointer to NULL
+ */
 void allocator_destroy(Allocator **alloc_addr) {
     Allocator *alloc = *alloc_addr;
     for (size_t i = 0; i < alloc->block_size; i++) {
@@ -93,6 +109,9 @@ void allocator_destroy(Allocator **alloc_addr) {
     *alloc_addr = NULL;
 }
 
+/*
+ * Print an allocator
+*/
 void allocator_info(Allocator *alloc) {
     printf("╭────────────────%s──────────────────╮\n", alloc == NULL ? "─" : "┬");
     if (alloc == NULL) {

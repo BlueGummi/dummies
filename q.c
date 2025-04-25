@@ -1,4 +1,4 @@
-#include "core.h"
+#include <core.h>
 #include <q.h>
 #include <stdio.h>
 #include <stdlib.h>
